@@ -1,8 +1,7 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import React, { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-import { Button } from "antd";
 import { Toaster } from "react-hot-toast";
 import Home from "./pages/Home";
 import { useSelector } from "react-redux";
@@ -16,14 +15,24 @@ import Profile from "./pages/Doctor/Profile";
 import BookAppointment from "./pages/BookAppointment";
 import Appointments from "./pages/Appointments";
 import DoctorAppointments from "./pages/Doctor/DoctorAppointments";
+import OCRFileUpload from "./pages/OCRFileUpload";
+
+const OpenOCR = () => {
+  useEffect(() => {
+    window.open("http://localhost:8501/", "_blank"); // Opens in new tab
+  }, []);
+
+  return <Navigate to="/" />; // Redirects back to home
+};
 
 function App() {
   const { loading } = useSelector((state) => state.alerts);
+
   return (
     <BrowserRouter>
       {loading && (
         <div className="spinner-parent">
-          <div class="spinner-border" role="status"></div>
+          <div className="spinner-border" role="status"></div>
         </div>
       )}
       <Toaster position="top-center" reverseOrder={false} />
@@ -76,7 +85,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/admin/doctorslist"
           element={
@@ -85,7 +93,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/doctor/profile/:userId"
           element={
@@ -94,7 +101,6 @@ function App() {
             </ProtectedRoute>
           }
         />
-
         <Route
           path="/book-appointment/:doctorId"
           element={
@@ -111,7 +117,14 @@ function App() {
             </ProtectedRoute>
           }
         />
-
+        <Route
+          path="/ocr"
+          element={
+            <ProtectedRoute>
+              <OpenOCR />
+            </ProtectedRoute>
+          }
+        />
         <Route
           path="/doctor/appointments"
           element={

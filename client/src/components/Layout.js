@@ -25,6 +25,11 @@ function Layout({ children }) {
       name: "Apply Doctor",
       path: "/apply-doctor",
       icon: "ri-hospital-line",
+    },
+    {
+      name: "HTR",
+      path: "/ocr",
+      icon: "ri-hospital-line",
     }
   ];
 
@@ -44,6 +49,11 @@ function Layout({ children }) {
       path: `/doctor/profile/${user?._id}`,
       icon: "ri-user-line",
     },
+    {
+      name: "HTR",
+      path: "/ocr",
+      icon: "ri-hospital-line",
+    }
   ];
 
   const adminMenu = [
@@ -67,6 +77,11 @@ function Layout({ children }) {
       path: "/profile",
       icon: "ri-user-line",
     },
+    {
+      name: "HTR",
+      path: "/ocr",
+      icon: "ri-hospital-line",
+    }
   ];
 
   const menuToBeRendered = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
